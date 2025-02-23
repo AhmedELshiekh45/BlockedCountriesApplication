@@ -1,6 +1,7 @@
 using DataAccessLayer.Repositories.BlockedAttemps;
 using DataAccessLayer.Repositories.BlockedCountries;
 using DataAccessLayer.Repositories.TemporalBlockCountries;
+using Microsoft.OpenApi.Models;
 using Services.AttempsServices;
 using Services.Conteries;
 using Services.GeoLocationService;
@@ -24,7 +25,23 @@ builder.Services.AddScoped<ITemporalBlockService, TemporalBlockService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Register Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Blocked Countries API",
+        Version = "v1",
+        Description = "API for managing blocked countries and validating IP addresses.",
+        Contact = new OpenApiContact
+        {
+            Name = "Ahmed ELshiekh",
+            Email = "ahmedelshiekh190@gmail.com"
+        }
+    });
+});
+
+
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
