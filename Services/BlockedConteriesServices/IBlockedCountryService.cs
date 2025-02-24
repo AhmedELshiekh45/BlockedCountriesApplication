@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.Countery;
 namespace Services.Conteries
 {
     public interface IBlockedCountryService

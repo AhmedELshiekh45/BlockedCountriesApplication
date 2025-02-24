@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Constants;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.Countery;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Services.LocationService;
@@ -22,11 +23,11 @@ namespace Services.GeoLocationService
             _apiKey = configuration["GeoLocationApi:ApiKey"];
         }
 
-        public async Task<DataAccessLayer.Models.Country> GetCountryByIpAsync(string ipAddress)
+        public async Task<Location> GetCountryByIpAsync(string ipAddress)
         {
             var response = await _httpClient.GetStringAsync($"https://api.ipgeolocation.io/ipgeo?apiKey={_apiKey}&ip={ipAddress}");
             var result = JsonConvert.DeserializeObject<dynamic>(response);
-            return new DataAccessLayer.Models.Country
+            return new Location
             {
                 Code = result.country_code2,
                 Name = result.country_name,
@@ -36,14 +37,14 @@ namespace Services.GeoLocationService
         }
 
         // get country details by countery code using  (REST Countries) service
-        public async Task<DataAccessLayer.Models.Country> GetCountryByCodeAsync(string countryCode)
+        public async Task<Country> GetCountryByCodeAsync(string countryCode)
         {
             var response = await _httpClient.GetStringAsync($"https://restcountries.com/v3.1/alpha/{countryCode}");
             var countries = JsonConvert.DeserializeObject<CountryInfo[]>(response);
 
             if (countries != null && countries.Length>0)
             {
-                return new DataAccessLayer.Models.Country
+                return new Country
                 {
                     Code = countryCode,
                     Name = countries[0].Name.Common,

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.Countery;
 
 namespace Services.LocationService
 {
     public interface ILocationService
     {
-        Task<DataAccessLayer.Models.Country> GetCountryByIpAsync(string ipAddress);
-        Task<DataAccessLayer.Models.Country> GetCountryByCodeAsync(string countryCode);
+        Task<Location> GetCountryByIpAsync(string ipAddress);
+        Task<Country> GetCountryByCodeAsync(string countryCode);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccessLayer.Constants.TemporalBlock;
+using DataAccessLayer.Models.TemporalBlock;
 using DataAccessLayer.Repositories.TemporalBlockCountries;
 
 namespace Services.TemporalBlockedCounteryServices

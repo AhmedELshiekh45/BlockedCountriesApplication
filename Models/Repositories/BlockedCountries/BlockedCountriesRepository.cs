@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.Countery;
 
 namespace DataAccessLayer.Repositories.BlockedCountries
 {

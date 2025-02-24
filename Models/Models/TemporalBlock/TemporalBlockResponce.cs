@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Constants.TemporalBlock
+namespace DataAccessLayer.Models.TemporalBlock
 {
-    public class TemporalBlockRequest
+    public class TemporalBlockResponce
     {
         public string CountryCode { get; set; }
-        public int DurationMinutes { get; set; }
+        public DateTime ExpiryTime { get; set; }
     }
+
+
 }

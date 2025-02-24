@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.Countery;
 using DataAccessLayer.Repositories.BlockedCountries;
 using Services.LocationService;
 
@@ -23,15 +24,24 @@ namespace Services.Conteries
 
         public async Task BlockAsync(string countryCode)
         {
-            if (!await _blockedCountriesRepository.IsBlockedAsync(countryCode))
+            try
             {
-                var countery = await _locationService.GetCountryByCodeAsync(countryCode);
-                if (countery != null)
+                if (!await _blockedCountriesRepository.IsBlockedAsync(countryCode))
                 {
+                    var countery = await _locationService.GetCountryByCodeAsync(countryCode);
+                    if (countery != null)
+                    {
 
-                    await _blockedCountriesRepository.AddAsync(countery);
+                        await _blockedCountriesRepository.AddAsync(countery);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
             return;
         }
 
