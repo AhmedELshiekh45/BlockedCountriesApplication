@@ -38,12 +38,11 @@ namespace ApI.Controllers
         }
 
         [HttpGet("check-block")]
-        public async Task<IActionResult> CheckBlock(string? ip)
+        public async Task<IActionResult> CheckBlock()
         {
-            if (string.IsNullOrEmpty(ip))
-            {
-                ip = HttpContext.Connection.RemoteIpAddress?.ToString();
-            }
+           
+            var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+            
 
             var userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
 

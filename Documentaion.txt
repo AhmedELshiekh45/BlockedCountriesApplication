@@ -170,15 +170,6 @@
         "tags": [
           "Ip"
         ],
-        "parameters": [
-          {
-            "name": "ip",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
