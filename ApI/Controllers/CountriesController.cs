@@ -5,6 +5,7 @@ using DataAccessLayer.Models.TemporalBlock;
 using DataAccessLayer.Repositories.BlockedCountries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Services.Conteries;
 using Services.TemporalBlockedCounteryServices;
 
@@ -24,6 +25,7 @@ namespace ApI.Controllers
         }
 
         [HttpPost("block")]
+        [EnableRateLimiting("fixed")]
         public async Task<IActionResult> BlockCountry([FromBody] string countryCode)
         {
             if (await _service.IsBlockedAsync(countryCode))
