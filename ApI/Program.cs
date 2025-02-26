@@ -1,6 +1,8 @@
+using System.Threading.RateLimiting;
 using DataAccessLayer.Repositories.BlockedAttemps;
 using DataAccessLayer.Repositories.BlockedCountries;
 using DataAccessLayer.Repositories.TemporalBlockCountries;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.OpenApi.Models;
 using Services.AttempsServices;
 using Services.Conteries;
@@ -42,6 +44,16 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
+builder.Services.AddRateLimiter(_ => _
+    .AddFixedWindowLimiter(policyName: "fixed", options =>
+    { 
+        options.PermitLimit = 4;
+        options.Window = TimeSpan.FromSeconds(12);
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 2;
+    }));
+
+
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
@@ -52,6 +64,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseRateLimiter();
 
 app.UseHttpsRedirection();
 

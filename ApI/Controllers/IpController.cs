@@ -2,6 +2,7 @@
 using DataAccessLayer.Repositories.BlockedCountries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Services.AttempsServices;
 using Services.Conteries;
 using Services.GeoLocationService;
@@ -11,6 +12,7 @@ namespace ApI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableRateLimiting("fixed")] // Apply rate limiting to this specific action
     public class IpController : ControllerBase
     {
         private readonly ILocationService _geoLocationService;
